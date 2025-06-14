@@ -1,7 +1,6 @@
-import React from "react";
-import { Player } from "@lottiefiles/react-lottie-player";
-// import loginAnimation from "../assets/login/login-animation.json"; // replace with your Lottie animation file
+import loginAnimation from "../assets/login/Animation - 1749911072868.json"; // replace with your Lottie animation file
 import { Link } from "react-router";
+import Lottie from "lottie-react";
 
 const Login = () => {
   return (
@@ -9,11 +8,11 @@ const Login = () => {
       <div className="w-full max-w-4xl bg-white shadow-2xl rounded-3xl overflow-hidden grid grid-cols-1 md:grid-cols-2">
         {/* Left: Animation or illustration */}
         <div className="bg-indigo-50 flex flex-col items-center justify-center p-8">
-          <Player
+          <Lottie
             autoplay
-            loop
-            // src={loginAnimation}
-            style={{ height: "300px", width: "300px" }}
+            loop={true}
+            animationData={loginAnimation}
+            style={{ height: "350px", width: "350px" }}
           />
           <h2 className="text-xl font-semibold text-indigo-700 mt-4">
             Welcome Back!
@@ -33,7 +32,7 @@ const Login = () => {
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="w-full border border-gray-300 rounded-xl px-4 py-2 focus:ring-2 focus:ring-indigo-300 outline-none"
+                className="w-full text-black border border-gray-300 rounded-xl px-4 py-2 focus:ring-2 focus:ring-indigo-300 outline-none"
               />
             </div>
 
@@ -43,7 +42,7 @@ const Login = () => {
               <input
                 type="password"
                 placeholder="Enter your password"
-                className="w-full border border-gray-300 rounded-xl px-4 py-2 focus:ring-2 focus:ring-indigo-300 outline-none"
+                className="w-full text-black border border-gray-300 rounded-xl px-4 py-2 focus:ring-2 focus:ring-indigo-300 outline-none"
               />
             </div>
 
