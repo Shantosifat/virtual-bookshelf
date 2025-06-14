@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Home = () => {
+const PrivateRoute = ({children}) => {
     return (
         <div>
-            babes
+            
         </div>
     );
 };
 
-export default Home;
+export default PrivateRoute;
