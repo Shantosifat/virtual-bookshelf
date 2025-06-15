@@ -1,25 +1,26 @@
 import React, { use } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
+import axios from "axios";
 
 const AddBook = () => {
-  const {user} = use(AuthContext)
+  const { user } = use(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
-    const bookData = {
-      title: form.title.value,
-      photo: form.photo.value,
-      total_page: form.total_page.value,
-      author: form.author.value,
-      email: form.email.value,
-      name: form.name.value,
-      category: form.category.value,
-      status: form.status.value,
-      overview: form.overview.value,
-      upvote: 0,
-    };
-    console.log("Submitted Book:", bookData);
+
+    const formData = new FormData(form);
+    const newBook = Object.fromEntries(formData.entries());
+    console.log(newBook);
+
+    newBook.likedBy = [];
+
+    // save book data
+    axios
+      .post(`${import.meta.env.VITE_API_URL}/add-book`, newBook)
+      .then((data) => {
+        console.log(data);
+      });
     form.reset();
   };
 
@@ -45,7 +46,9 @@ const AddBook = () => {
 
             {/* Cover Photo */}
             <div>
-              <label className="block text-gray-600 mb-1">Cover Photo URL</label>
+              <label className="block text-gray-600 mb-1">
+                Cover Photo URL
+              </label>
               <input
                 name="photo"
                 required
@@ -97,7 +100,7 @@ const AddBook = () => {
               <input
                 name="name"
                 // value={user.name}
-                
+
                 className="w-full px-4 py-2 text-black border border-gray-300 rounded-lg "
                 type="text"
               />
@@ -138,7 +141,7 @@ const AddBook = () => {
               <label className="block text-gray-600 mb-1">Upvotes</label>
               <input
                 name="upvote"
-                defaultValue='0'
+                defaultValue="0"
                 readOnly
                 className="w-full px-4 py-2 text-black border border-gray-300 rounded-lg "
                 type="number"

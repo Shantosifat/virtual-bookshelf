@@ -46,6 +46,8 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
+  
+
   // to keep data after reload
 
   useEffect(() => {
