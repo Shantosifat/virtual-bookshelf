@@ -17,6 +17,12 @@ const Signup = () => {
     const email = form.email.value;
     const password = form.password.value;
     console.log(name, email, password, photo);
+        // const formData = new FormData(form);
+
+        // const { email, password, ...restFormData } = Object.fromEntries(formData.entries());
+
+        
+    
 
     // Password validation
     // const hasUppercase = /[A-Z]/.test(password);

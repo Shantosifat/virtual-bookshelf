@@ -1,8 +1,46 @@
 import loginAnimation from "../assets/login/Animation - 1749911072868.json"; // replace with your Lottie animation file
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import Lottie from "lottie-react";
+import { use } from "react";
+import { AuthContext } from "../Provider/AuthProvider";
+import { FaGoogle } from "react-icons/fa";
 
 const Login = () => {
+  const { logIn, googleSignIn } = use(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // login
+  const handleSignIn = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log({ email, password });
+
+    // signin
+    logIn(email, password)
+      .then((result) => {
+        console.log(result.user);
+        navigate(`${location.state ? location.state : "/"}`);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  // google
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        navigate(`${location.state ? location.state : "/"}`);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-tr from-indigo-100 via-sky-50 to-rose-50 p-4">
       <div className="w-full max-w-4xl bg-white shadow-2xl rounded-3xl overflow-hidden grid grid-cols-1 md:grid-cols-2">
@@ -25,12 +63,13 @@ const Login = () => {
         {/* Right: Login form */}
         <div className="p-8 md:p-10">
           <h2 className="text-3xl font-bold text-gray-800 mb-6">Log In</h2>
-          <form className="space-y-5">
+          <form onSubmit={handleSignIn} className="space-y-5">
             {/* Email */}
             <div>
               <label className="block mb-1 text-gray-600">Email</label>
               <input
                 type="email"
+                name="email"
                 placeholder="Enter your email"
                 className="w-full text-black border border-gray-300 rounded-xl px-4 py-2 focus:ring-2 focus:ring-indigo-300 outline-none"
               />
@@ -41,17 +80,28 @@ const Login = () => {
               <label className="block mb-1 text-gray-600">Password</label>
               <input
                 type="password"
+                name="password"
                 placeholder="Enter your password"
                 className="w-full text-black border border-gray-300 rounded-xl px-4 py-2 focus:ring-2 focus:ring-indigo-300 outline-none"
               />
             </div>
+              <div>
+            <a className="link link-hover text-black">Forgot password?</a>
+          </div>
 
             {/* Submit */}
+           
             <button
               type="submit"
               className="w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl transition duration-200"
             >
               Log In
+            </button>
+            <button
+              onClick={handleGoogleSignIn}
+              className="btn btn-secondary btn-outline rounded-xl w-full my-1"
+            >
+              <FaGoogle size={18}></FaGoogle> SignIn with Google
             </button>
           </form>
 

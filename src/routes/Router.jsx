@@ -6,6 +6,10 @@ import SignUp from "../components/SignUp";
 import Footer from "../components/Footer";
 import BookShelf from "../components/BookShelf";
 import AuthLayouts from "../Layouts/AuthLayouts";
+import PrivateRoute from "../Provider/PrivateRoute"
+import AddBook from "../components/AddBook";
+import MyBooks from "../components/MyBooks";
+import Profile from "../components/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -21,6 +25,26 @@ export const router = createBrowserRouter([
         path: "bookShelf",
         Component: BookShelf,
       },
+      {
+        path: "addBook",
+        element:<PrivateRoute>
+          <AddBook></AddBook>
+        </PrivateRoute>
+      },
+      {
+        path: "myBooks",
+        element:
+        <PrivateRoute>
+          <MyBooks></MyBooks>
+        </PrivateRoute>
+      },
+      {
+        path: "profile",
+        element:<PrivateRoute>
+          <Profile></Profile>
+        </PrivateRoute>
+      },
+      
     ],
   },
   {

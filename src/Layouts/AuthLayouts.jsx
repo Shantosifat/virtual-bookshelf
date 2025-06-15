@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 const AuthLayouts = () => {
   return (
     <div className="min-h-screen">
-      <header className="w-11/12 mx-auto pt-4">
+      <header className="w-11/12 mx-auto py-2">
         <Header></Header>
       </header>
       <main className="w-11/12 mx-auto py-4">

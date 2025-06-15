@@ -18,7 +18,7 @@ const Footer = () => {
               href="mailto:support@skilllink.com"
               className="text-blue-400 hover:underline"
             >
-              support@skilllink.com
+              support@libree.com
             </a>
           </p>
           <p>
