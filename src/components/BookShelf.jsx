@@ -7,9 +7,18 @@ import { Link, useNavigate } from "react-router";
 
 const BookShelf = ({ book, books, setBooks }) => {
   const { user } = useContext(AuthContext);
-  const navigate = useNavigate()
-  const { _id, photo, title, category, upvote, author, total_page,status, email } =
-    book;
+  const navigate = useNavigate();
+  const {
+    _id,
+    photo,
+    title,
+    category,
+    upvote,
+    author,
+    total_page,
+    status,
+    email,
+  } = book;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
@@ -52,24 +61,55 @@ const BookShelf = ({ book, books, setBooks }) => {
   //     setFormData(prev => ({ ...prev, [name]: value }));
   //   };
 
+  //   const handleUpdate = (e) => {
+  //     e.preventDefault();
+  //     console.log("object");
+  //     const form = e.target;
+  //     const formData = new FormData(form);
+  //     const updatedData = Object.fromEntries(formData.entries());
+  //     console.log(updatedData);
+
+  //     // send updated data to the db
+  //     fetch(`${import.meta.env.VITE_API_URL}/update/${_id}`, {
+  //       method: "PUT",
+  //       headers: {
+  //         "content-type": "application/json",
+  //       },
+  //       body: JSON.stringify(updatedData),
+  //     })  .then((res) => res.json())
+  //       .then((data) => {
+  //         console.log("after update", data);
+  //         if (data.modifiedCount) {
+  //           Swal.fire({
+  //             position: "middle",
+  //             icon: "success",
+  //             title: "Updated Successfully",
+  //             showConfirmButton: false,
+  //             timer: 1000,
+  //           });
+  //           setIsModalOpen(false);
+  //         }
+  //         navigate('/')
+  //       });
+
+  //   };
+
   const handleUpdate = (e) => {
     e.preventDefault();
-    console.log("object");
     const form = e.target;
     const formData = new FormData(form);
     const updatedData = Object.fromEntries(formData.entries());
-    console.log(updatedData);
 
-    // send updated data to the db
     fetch(`${import.meta.env.VITE_API_URL}/update/${_id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
       },
       body: JSON.stringify(updatedData),
-    })  .then((res) => res.json())
+    })
+      .then((res) => res.json())
       .then((data) => {
-        // console.log("after update", data);
+        console.log("after update", data);
         if (data.modifiedCount) {
           Swal.fire({
             position: "middle",
@@ -78,18 +118,30 @@ const BookShelf = ({ book, books, setBooks }) => {
             showConfirmButton: false,
             timer: 1000,
           });
-          setIsModalOpen(false);
-        }
-        navigate('/')
-      });
 
+          //  Update the local state if available
+          if (setBooks) {
+            setBooks((prevBooks) =>
+              prevBooks.map((book) =>
+                book._id === _id ? { ...book, ...updatedData } : book
+              )
+            );
+          }
+
+          // Close modal
+          if (setIsModalOpen) setIsModalOpen(false);
+
+          //  redirect only if you're not on the same page
+          // navigate('/');
+        }
+      });
   };
 
   return (
     <>
-      <div className="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col md:flex-row transition-transform hover:scale-[1.01] duration-300">
+      <div className="bg-slate-100 rounded-2xl shadow-lg overflow-hidden flex flex-col md:flex-row transition-transform hover:scale-[1.01] duration-300">
         {/* left */}
-                <div className="md:w-2/5 w-full m-2">
+        <div className="md:w-2/5 w-full m-2">
           <img
             src={photo}
             alt={title}
@@ -116,7 +168,8 @@ const BookShelf = ({ book, books, setBooks }) => {
 
           <div className="mt-6 flex gap-3 flex-wrap">
             <Link to={`/book/${_id}`}>
-            <button className="btn btn-outline btn-primary">View</button></Link>
+              <button className="btn btn-outline btn-primary">View</button>
+            </Link>
 
             {user?.email === email && (
               <>
@@ -148,7 +201,9 @@ const BookShelf = ({ book, books, setBooks }) => {
             >
               ✕
             </button>
-            <h2 className="text-2xl font-bold mb-5 text-center">Update Book</h2>
+            <h2 className="text-2xl text-white font-bold mb-5 text-center">
+              Update Book
+            </h2>
             <form onSubmit={handleUpdate} className="">
               <div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -160,7 +215,7 @@ const BookShelf = ({ book, books, setBooks }) => {
                     <input
                       name="title"
                       required
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-300 outline-none"
+                      className="w-full text-white px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-300 outline-none"
                       type="text"
                       defaultValue={title}
                       placeholder="Enter book title"
@@ -175,7 +230,7 @@ const BookShelf = ({ book, books, setBooks }) => {
                     <input
                       name="photo"
                       required
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-300 outline-none"
+                      className="w-full text-white px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-300 outline-none"
                       type="text"
                       defaultValue={photo}
                       placeholder="https://..."
@@ -190,7 +245,7 @@ const BookShelf = ({ book, books, setBooks }) => {
                     <input
                       name="total_page"
                       required
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-300 outline-none"
+                      className="w-full text-white px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-300 outline-none"
                       type="number"
                       defaultValue={total_page}
                       placeholder="e.g. 300"
@@ -203,7 +258,7 @@ const BookShelf = ({ book, books, setBooks }) => {
                     <input
                       name="author"
                       required
-                      className="w-full  px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-300 outline-none"
+                      className="w-full text-white px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-300 outline-none"
                       type="text"
                       defaultValue={author}
                       placeholder="Author name"
@@ -219,7 +274,7 @@ const BookShelf = ({ book, books, setBooks }) => {
                       name="email"
                       value={user.email}
                       readOnly
-                      className="w-full px-4 py-2  border border-gray-300 rounded-lg "
+                      className="w-full text-white px-4 py-2  border border-gray-300 rounded-lg "
                       type="email"
                       defaultValue={email}
                     />
@@ -234,7 +289,7 @@ const BookShelf = ({ book, books, setBooks }) => {
                       name="name"
                       // value={user.name}
 
-                      className="w-full px-4 py-2  border border-gray-300 rounded-lg "
+                      className="w-full text-white px-4 py-2  border border-gray-300 rounded-lg "
                       type="text"
                       defaultValue={name}
                     />
@@ -283,7 +338,7 @@ const BookShelf = ({ book, books, setBooks }) => {
                       name="upvote"
                       defaultValue="0"
                       readOnly
-                      className="w-full px-4 py-2  border border-gray-300 rounded-lg "
+                      className="w-full text-white px-4 py-2  border border-gray-300 rounded-lg "
                       type="number"
                     />
                   </div>
@@ -294,7 +349,7 @@ const BookShelf = ({ book, books, setBooks }) => {
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="btn btn-outline"
+                  className="btn btn-active"
                 >
                   Cancel
                 </button>

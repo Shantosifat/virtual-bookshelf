@@ -22,7 +22,7 @@ const BookDetails = () => {
   } = book;
 
   return (
-    <div className="max-w-5xl mx-auto  py-6 mt-10 rounded-2xl shadow-md bg-slate-50">
+    <div className="max-w-5xl mx-auto  py-6 mt-10 rounded-2xl shadow-md bg-slate-100">
       <div className="grid md:grid-cols-2 gap-8 items-start">
         {/* Book Cover */}
         <div className="flex justify-center">
