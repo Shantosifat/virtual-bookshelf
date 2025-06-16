@@ -1,8 +1,11 @@
 import React, { use } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import axios from "axios";
+import { useNavigate } from "react-router";
+import Swal from "sweetalert2";
 
 const AddBook = () => {
+  const navigate = useNavigate();
   const { user } = use(AuthContext);
 
   const handleSubmit = (e) => {
@@ -20,6 +23,15 @@ const AddBook = () => {
       .post(`${import.meta.env.VITE_API_URL}/add-book`, newBook)
       .then((data) => {
         console.log(data);
+        Swal.fire({
+          title: "Data Added Successfully!",
+          icon: "success",
+          draggable: true,
+        });
+        // navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
       });
     form.reset();
   };
