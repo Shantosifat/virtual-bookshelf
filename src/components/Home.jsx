@@ -11,7 +11,7 @@ const Home = () => {
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 py-12 px-6 gap-6">
         {books.map((book) => (
-          <BookShelf key={book._id} book={book} />
+          <BookShelf key={book._id} book={book} books={books} setBooks={setBooks} />
         ))}
       </div>
     </div>

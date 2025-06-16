@@ -12,6 +12,7 @@ import MyBooks from "../components/MyBooks";
 import Profile from "../components/Profile";
 import axios from "axios";
 import BookDetails from "../components/BookDetails";
+import UpdateBook from "../components/UpdateBook";
 
 export const router = createBrowserRouter([
   {
@@ -37,8 +38,18 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/books/:id",
-        Component: BookDetails
+        path: "/book/:id",
+        loader: ({ params }) =>
+          axios(`${import.meta.env.VITE_API_URL}/book/${params.id}`),
+
+        Component: BookDetails,
+      },
+      {
+        path: "/updatedBook/:index",
+        loader: ({ params }) =>
+          axios(`${import.meta.env.VITE_API_URL}/book/${params.id}`),
+
+        Component: UpdateBook,
       },
       {
         path: "myBooks",

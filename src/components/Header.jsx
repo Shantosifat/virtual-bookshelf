@@ -97,7 +97,7 @@ const Header = () => {
           </li>
           <li>
             <Link to="/bookShelf" className="font-semibold">
-              BoofShelf
+              BookShelf
             </Link>
           </li>
           <li>
