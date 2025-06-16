@@ -1,96 +1,13 @@
-// import { useContext, useState } from "react";
-// import { Link } from "react-router";
-// import Swal from "sweetalert2";
-// import { AuthContext } from "../Provider/AuthProvider";
-// import axios from "axios";
-
-// const BookShelf = ({ book, books, setBooks }) => {
-//     const { user } = useContext(AuthContext);
-// //   const [books, setBooks] = useState([]);
-//   const { _id, photo, title, category, upvote, author } = book;
-
-//   const handleDelete = (id) => {
-//      Swal.fire({
-//       title: "Are you sure?",
-//       text: "You won't be able to revert this!",
-//       icon: "warning",
-//       showCancelButton: true,
-//       confirmButtonColor: "#3085d6",
-//       cancelButtonColor: "#d33",
-//       confirmButtonText: "Yes, delete it!",
-//     }).then((result) => {
-//       if (result.isConfirmed) {
-//         axios
-//           .delete(`${import.meta.env.VITE_API_URL}/delete/${id}`)
-//           .then((res) => {
-//             if (res.data.deletedCount) {
-//               Swal.fire("Deleted!", "Task has been deleted.", "success");
-//               const remaining = books.filter((b) => b._id !== id);
-//               setBooks(remaining);
-//             }
-//           })
-//           .catch((err) => {
-//             console.error(err);
-//             Swal.fire("Error!", "Something went wrong.", "error");
-//           });
-//       }
-//     });
-//   };
-
-//   return (
-//     <div className="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col md:flex-row transition-transform hover:scale-[1.01] duration-300">
-
-//       {/* Left: Cover Photo */}
-//       <div className="md:w-2/5 w-full">
-//         <img
-//           src={photo}
-//           alt={title}
-//           className="w-full h-[350px] object-cover"
-//         />
-//       </div>
-
-//       {/* Right: Book Info & Actions */}
-//       <div className="md:w-3/5 w-full p-6 flex flex-col justify-between">
-
-//         {/* Book Info */}
-//         <div>
-//           <h2 className="text-3xl font-bold text-gray-800 mb-2">{title}</h2>
-//           <p className="text-lg text-gray-600 mb-1">
-//             <span className="font-semibold text-gray-700">Author:</span> {author}
-//           </p>
-//           <p className="text-lg text-gray-600 mb-1">
-//             <span className="font-semibold text-gray-700">Category:</span> {category}
-//           </p>
-//           <p className="text-lg text-indigo-600 font-semibold mt-3">
-//             Upvotes: {upvote}
-//           </p>
-//         </div>
-
-//         {/* Action Buttons */}
-//         <div className="mt-6 flex gap-3 flex-wrap">
-//           <Link to={`/book/${_id}`}>
-//             <button className="btn btn-outline btn-primary">View</button>
-//           </Link>
-//           <Link to={`/updatedBook/${_id}`}>
-//             <button className="btn btn-outline btn-warning">Edit</button>
-//           </Link>
-//           <button onClick={()=>handleDelete(_id)} className="btn btn-outline btn-error">Delete</button>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default BookShelf;
-
 import { useContext, useState } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../Provider/AuthProvider";
 import axios from "axios";
 import UpdateBook from "./UpdateBook";
+import { Link, useNavigate } from "react-router";
 
 const BookShelf = ({ book, books, setBooks }) => {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate()
   const { _id, photo, title, category, upvote, author, total_page,status, email } =
     book;
 
@@ -135,38 +52,52 @@ const BookShelf = ({ book, books, setBooks }) => {
   //     setFormData(prev => ({ ...prev, [name]: value }));
   //   };
 
-  const handleUpdate = async (e) => {
+  const handleUpdate = (e) => {
     e.preventDefault();
     console.log("object");
-    // try {
-    //   const res = await axios.put(`${import.meta.env.VITE_API_URL}/books/${_id}`, formData);
-    //   if (res.data.modifiedCount > 0) {
-    //     Swal.fire("Success!", "Book updated successfully!", "success");
-    //     setIsModalOpen(false);
-    //     const updated = books.map(b => b._id === _id ? { ...b, ...formData } : b);
-    //     setBooks(updated);
-    //   } else {
-    //     Swal.fire("No Changes", "Nothing was updated.", "info");
-    //   }
-    // } catch (err) {
-    //   console.error(err);
-    //   Swal.fire("Error!", "Something went wrong.", "error");
-    // }
+    const form = e.target;
+    const formData = new FormData(form);
+    const updatedData = Object.fromEntries(formData.entries());
+    console.log(updatedData);
+
+    // send updated data to the db
+    fetch(`${import.meta.env.VITE_API_URL}/update/${_id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(updatedData),
+    })  .then((res) => res.json())
+      .then((data) => {
+        // console.log("after update", data);
+        if (data.modifiedCount) {
+          Swal.fire({
+            position: "middle",
+            icon: "success",
+            title: "Updated Successfully",
+            showConfirmButton: false,
+            timer: 1000,
+          });
+          setIsModalOpen(false);
+        }
+        navigate('/')
+      });
+
   };
 
   return (
     <>
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col md:flex-row transition-transform hover:scale-[1.01] duration-300">
-        {/* Left: Cover Photo */}
-        <div className="md:w-2/5 w-full">
+        {/* left */}
+                <div className="md:w-2/5 w-full m-2">
           <img
             src={photo}
             alt={title}
-            className="w-full h-[350px] object-cover"
+            className="w-full h-[350px] rounded-xl object-cover"
           />
         </div>
 
-        {/* Right: Book Info & Actions */}
+        {/* Right */}
         <div className="md:w-3/5 w-full p-6 flex flex-col justify-between">
           <div>
             <h2 className="text-3xl font-bold text-gray-800 mb-2">{title}</h2>
@@ -184,7 +115,8 @@ const BookShelf = ({ book, books, setBooks }) => {
           </div>
 
           <div className="mt-6 flex gap-3 flex-wrap">
-            <button className="btn btn-outline btn-primary">View</button>
+            <Link to={`/book/${_id}`}>
+            <button className="btn btn-outline btn-primary">View</button></Link>
 
             {user?.email === email && (
               <>

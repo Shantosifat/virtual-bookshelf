@@ -13,6 +13,7 @@ import Profile from "../components/Profile";
 import axios from "axios";
 import BookDetails from "../components/BookDetails";
 import UpdateBook from "../components/UpdateBook";
+import Error from "../components/Error";
 
 export const router = createBrowserRouter([
   {
@@ -83,4 +84,9 @@ export const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path:"*",
+    Component: Error
+
+  }
 ]);
