@@ -1,11 +1,13 @@
-import React from 'react';
-import { useLoaderData } from 'react-router';
+import React from "react";
+import { Link, useLoaderData } from "react-router";
 
 const BookDetails = () => {
   const { data: book } = useLoaderData();
 
   if (!book)
-    return <div className="text-center py-10 text-xl">Loading book details...</div>;
+    return (
+      <div className="text-center py-10 text-xl">Loading book details...</div>
+    );
 
   const {
     title,
@@ -64,9 +66,15 @@ const BookDetails = () => {
             </p>
           </div>
           <div className="pt-4 border-t border-gray-300">
-            <h4 className="text-sm font-semibold text-gray-700">Likes: {likedBy.length}</h4>
-           
+            <h4 className="text-sm font-semibold text-gray-700">
+              Likes: {likedBy.length}
+            </h4>
           </div>
+          <Link to="/">
+            <button className="btn btn-active w-sm ml-7 mt-20">
+              Back To Previous Page
+            </button>
+          </Link>
         </div>
       </div>
     </div>

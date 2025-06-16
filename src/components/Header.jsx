@@ -67,7 +67,7 @@ const Header = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/" className="font-semibold mb-2">
+                  <Link to="/profile" className="font-semibold mb-2">
                     Profile
                   </Link>
                 </li>
@@ -83,7 +83,7 @@ const Header = () => {
             )}
           </ul>
         </div>
-        <div className="flex justify-center items-center">
+        <div className="flex pl-3 justify-center items-center pb-2">
           <img src={logo} className="w-10" alt="" />
           <a className="btn btn-ghost text-xl">Libree</a>
         </div>
@@ -114,7 +114,7 @@ const Header = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/" className="font-semibold ">
+                <Link to="/profile" className="font-semibold ">
                   Profile
                 </Link>
               </li>

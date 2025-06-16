@@ -18,7 +18,7 @@ const ErrorPage = () => {
         className="text-2xl md:text-3xl font-semibold text-center mb-6"
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.2 }}
+        transition={{ delay: 0.5 }}
       >
         Oops! Page not found.
       </motion.h2>
@@ -27,7 +27,7 @@ const ErrorPage = () => {
         className="text-gray-300 text-center max-w-md mb-8"
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.3 }}
+        transition={{ delay: 0.5 }}
       >
         The page you are looking for doesn’t exist or has been moved. Let’s get you back to a safe place.
       </motion.p>
@@ -35,7 +35,7 @@ const ErrorPage = () => {
       <motion.div
         initial={{ y: 10, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.4 }}
+        transition={{ delay:0.5  }}
       >
         <Link
           to="/"
