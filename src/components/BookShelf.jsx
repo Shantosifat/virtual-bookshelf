@@ -21,12 +21,12 @@ const BookShelf = ({ book, books, setBooks }) => {
   } = book;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [formData, setFormData] = useState({
-    title,
-    author,
-    photo,
-    category,
-  });
+  // const [formData, setFormData] = useState({
+  //   title,
+  //   author,
+  //   photo,
+  //   category,
+  // });
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -56,7 +56,6 @@ const BookShelf = ({ book, books, setBooks }) => {
     });
   };
 
-  //   const handleChange = (e) => {
   //     const { name, value } = e.target;
   //     setFormData(prev => ({ ...prev, [name]: value }));
   //   };

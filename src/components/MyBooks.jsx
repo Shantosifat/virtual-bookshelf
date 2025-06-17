@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider"; // Adjust path based on your project
 import Swal from "sweetalert2";
-import { Link } from "react-router";
+import { Link, useLoaderData } from "react-router";
 import axios from "axios";
 
 const MyBook = () => {
+  const data = useLoaderData()
   const { user } = useContext(AuthContext);
   const [myBooks, setMyBooks] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -72,7 +73,6 @@ const MyBook = () => {
               timer: 1000,
             });
   
-            //  Update the local state if available
             if (setMyBooks) {
               setMyBooks((prevBooks) =>
                 prevBooks.map((book) =>
@@ -84,7 +84,7 @@ const MyBook = () => {
             // Close modal
             if (setIsModalOpen) setIsModalOpen(false);
   
-            //  redirect only if you're not on the same page
+          
             // navigate('/');
           }
         });
@@ -92,7 +92,7 @@ const MyBook = () => {
 
   return (
     <>
-    <div className="min-h-screen bg-gradient-to-br from-rose-50 via-white to-indigo-50 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-rose-100 via-white to-indigo-100 p-6">
       <h2 className="text-3xl font-bold text-center text-indigo-700 mb-8">
         My Books
       </h2>
@@ -104,7 +104,7 @@ const MyBook = () => {
           {myBooks.map((book) => (
             <div
               key={book._id}
-              className="bg-white rounded-xl shadow-lg p-6 flex flex-col justify-between"
+              className="bg-slate-50 rounded-xl shadow-lg p-6 flex flex-col justify-between"
             >
               <div>
                 <img
@@ -144,7 +144,7 @@ const MyBook = () => {
                   onClick={() => setIsModalOpen(true)}
                   className="btn btn-outline btn-warning"
                 >
-                  Updata
+                  Update
                 </button>
                 <button
                   onClick={() => handleDelete(book._id)}
@@ -185,7 +185,7 @@ const MyBook = () => {
                       required
                       className="w-full text-white px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-300 outline-none"
                       type="text"
-                      // defaultValue={book.title}
+                      // defaultValue={myBooks.title}
                       placeholder="Enter book title"
                     />
                   </div>
