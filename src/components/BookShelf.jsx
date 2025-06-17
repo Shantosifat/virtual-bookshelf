@@ -91,7 +91,9 @@ const BookShelf = ({ book, books, setBooks }) => {
   const handleView = () => {
     if (!user) {
       navigate("/auth/signIn");
-    } 
+    } else {
+      navigate(`/book/${_id}`);
+    }
   };
 
   return (
