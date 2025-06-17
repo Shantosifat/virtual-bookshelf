@@ -13,7 +13,7 @@ const BookShelf = ({ book, books, setBooks }) => {
     photo,
     title,
     category,
-    upvote,
+    upvoted,
     author,
     total_page,
     status,
@@ -162,7 +162,7 @@ const BookShelf = ({ book, books, setBooks }) => {
               {category}
             </p>
             <p className="text-lg text-indigo-600 font-semibold mt-3">
-              Upvotes: {upvote}
+              Upvotes: {upvoted.length}
             </p>
           </div>
 
