@@ -38,7 +38,7 @@ const Home = () => {
           className="text-3xl font-bold mb-6 text-center text-indigo-700"
           initial={{ y: 40, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
+          transition={{ delay: 0, duration: 0.6 }}
           viewport={{ once: true }}
         >
           Most Popular Books
@@ -59,7 +59,7 @@ const Home = () => {
                 key={book._id}
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4 }}
+                transition={{ duration: 0.1 }}
               >
                 <BookShelf
                   book={book}

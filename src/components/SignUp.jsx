@@ -19,22 +19,22 @@ const Signup = () => {
     console.log(name, email, password, photo);
 
     // Password validation
-    // const hasUppercase = /[A-Z]/.test(password);
-    // const hasLowercase = /[a-z]/.test(password);
-    // const isLongEnough = password.length >= 6;
+    const hasUppercase = /[A-Z]/.test(password);
+    const hasLowercase = /[a-z]/.test(password);
+    const isLongEnough = password.length >= 6;
 
-    // if (!hasUppercase) {
-    //   alert("Password must contain at least one uppercase letter.");
-    //   return;
-    // }
-    // if (!hasLowercase) {
-    //   alert("Password must contain at least one lowercase letter.");
-    //   return;
-    // }
-    // if (!isLongEnough) {
-    //   alert("Password must be at least 6 characters long.");
-    //   return;
-    // }
+    if (!hasUppercase) {
+      alert("Password must contain at least one uppercase letter.");
+      return;
+    }
+    if (!hasLowercase) {
+      alert("Password must contain at least one lowercase letter.");
+      return;
+    }
+    if (!isLongEnough) {
+      alert("Password must be at least 6 characters long.");
+      return;
+    }
 
     // createUser
 
@@ -130,6 +130,14 @@ const Signup = () => {
                 name="password"
                 className="w-full border text-black border-gray-300 rounded-xl px-4 py-2 focus:ring-2 focus:ring-indigo-300 outline-none"
               />
+            </div>
+
+            <div className="text-red-700">
+              <p>
+              
+                Password must have:\n- At least one uppercase letter\n- At least
+                one lowercase letter\n- Minimum length of 6 characters
+              </p>
             </div>
 
             {/* Submit */}

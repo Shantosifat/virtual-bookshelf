@@ -6,7 +6,7 @@ import { useNavigate } from "react-router";
 const AllBooks = () => {
   const [books, setBooks] = useState([]);
   const [searchText, setSearchText] = useState("");
-  const [readingStatus, setReadingStatus] = useState(""); // for dropdown filter
+  const [readingStatus, setReadingStatus] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -70,7 +70,7 @@ const AllBooks = () => {
               className="bg-white rounded-xl shadow-md p-5 cursor-pointer hover:shadow-lg"
               whileHover={{ scale: 1.03 }}
               transition={{ duration: 0.3 }}
-              onClick={() => navigate(`/book/${book._id}`)}
+              // onClick={() => navigate(`/book/${book._id}`)}
             >
               <img
                 src={book.photo}

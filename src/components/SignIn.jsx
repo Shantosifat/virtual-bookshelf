@@ -18,23 +18,23 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
     console.log({ email, password });
-     // Password validation
-    // const hasUppercase = /[A-Z]/.test(password);
-    // const hasLowercase = /[a-z]/.test(password);
-    // const isLongEnough = password.length >= 6;
+    // Password validation
+    const hasUppercase = /[A-Z]/.test(password);
+    const hasLowercase = /[a-z]/.test(password);
+    const isLongEnough = password.length >= 6;
 
-    // if (!hasUppercase) {
-    //   alert("Password must contain at least one uppercase letter.");
-    //   return;
-    // }
-    // if (!hasLowercase) {
-    //   alert("Password must contain at least one lowercase letter.");
-    //   return;
-    // }
-    // if (!isLongEnough) {
-    //   alert("Password must be at least 6 characters long.");
-    //   return;
-    // }
+    if (!hasUppercase) {
+      alert("Password must contain at least one uppercase letter.");
+      return;
+    }
+    if (!hasLowercase) {
+      alert("Password must contain at least one lowercase letter.");
+      return;
+    }
+    if (!isLongEnough) {
+      alert("Password must be at least 6 characters long.");
+      return;
+    }
 
     // signin
     logIn(email, password)
@@ -103,12 +103,19 @@ const Login = () => {
                 className="w-full text-black border border-gray-300 rounded-xl px-4 py-2 focus:ring-2 focus:ring-indigo-300 outline-none"
               />
             </div>
-              <div>
-            <a className="link link-hover text-black">Forgot password?</a>
-          </div>
+            <div className="text-red-700">
+              <p>
+              
+                Password must have:\n- At least one uppercase letter\n- At least
+                one lowercase letter\n- Minimum length of 6 characters
+              </p>
+            </div>
+            <div>
+              <a className="link link-hover text-black">Forgot password?</a>
+            </div>
 
             {/* Submit */}
-           
+
             <button
               type="submit"
               className="w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl transition duration-200"
