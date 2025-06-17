@@ -21,7 +21,7 @@ const Header = () => {
       });
   };
 
-  // Extracted Nav Items
+  // links
   const navLinks = (
     <>
       <li><Link to="/">Home</Link></li>
