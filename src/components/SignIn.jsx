@@ -4,11 +4,17 @@ import Lottie from "lottie-react";
 import { use } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import { FaGoogle } from "react-icons/fa";
+import { useState } from "react";
 
 const Login = () => {
   const { logIn, googleSignIn } = use(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
+  //  const [showPassword, setShowPassword] = useState(false);
+
+  
+   
+
 
   // login
   const handleSignIn = (e) => {
@@ -17,6 +23,23 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
     console.log({ email, password });
+     // Password validation
+    // const hasUppercase = /[A-Z]/.test(password);
+    // const hasLowercase = /[a-z]/.test(password);
+    // const isLongEnough = password.length >= 6;
+
+    // if (!hasUppercase) {
+    //   alert("Password must contain at least one uppercase letter.");
+    //   return;
+    // }
+    // if (!hasLowercase) {
+    //   alert("Password must contain at least one lowercase letter.");
+    //   return;
+    // }
+    // if (!isLongEnough) {
+    //   alert("Password must be at least 6 characters long.");
+    //   return;
+    // }
 
     // signin
     logIn(email, password)

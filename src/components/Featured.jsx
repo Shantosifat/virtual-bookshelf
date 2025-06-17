@@ -8,7 +8,7 @@ const categories = [
     name: "Fiction",
     description: "Explore imaginative storytelling and literary classics.",
     image:
-      "https://images.unsplash.com/photo-1531219432768-9f540ce91ef6?auto=format&fit=crop&w=800&q=80",
+      "https://i.postimg.cc/MT2hBMkn/83cb389fea6e3d5df2f85d9bee2949fc.jpg",
   },
   {
     id: 2,
@@ -22,7 +22,7 @@ const categories = [
     name: "Fantasy",
     description: "Dive into magical worlds, legends, and mythical journeys.",
     image:
-      "https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?auto=format&fit=crop&w=800&q=80",
+      "https://i.postimg.cc/0QYh0kxc/9781408855652.jpg",
   },
 ];
 
@@ -39,7 +39,7 @@ const Featured = () => {
             key={category.id}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.2 }}
+            transition={{ duration: 1, delay: index * 0.2 }}
             viewport={{ once: true }}
             className="bg-white rounded-xl shadow-md hover:shadow-xl transition overflow-hidden"
           >

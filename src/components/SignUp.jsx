@@ -6,7 +6,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 import { FaGoogle } from "react-icons/fa";
 
 const Signup = () => {
-  const { createUser, googleSignIn } = use(AuthContext);
+  const { createUser, googleSignIn, updateUserProfile } = use(AuthContext);
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const handleSignUp = (e) => {
@@ -17,12 +17,6 @@ const Signup = () => {
     const email = form.email.value;
     const password = form.password.value;
     console.log(name, email, password, photo);
-        // const formData = new FormData(form);
-
-        // const { email, password, ...restFormData } = Object.fromEntries(formData.entries());
-
-        
-    
 
     // Password validation
     // const hasUppercase = /[A-Z]/.test(password);
@@ -47,6 +41,16 @@ const Signup = () => {
     createUser(email, password)
       .then((result) => {
         console.log(result.user);
+        updateUserProfile({
+          displayName: name,
+          photoURL: photo || [],
+        })
+          .then(() => {
+            console.log(" profile updated");
+          })
+          .catch((error) => {
+            console.log("updated failed", error);
+          });
         navigate("/");
       })
       .catch((error) => {

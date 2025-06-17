@@ -28,7 +28,7 @@ const AddBook = () => {
           icon: "success",
           draggable: true,
         });
-        // navigate("/");
+        navigate("/bookshelfs");
       })
       .catch((error) => {
         console.log(error);
