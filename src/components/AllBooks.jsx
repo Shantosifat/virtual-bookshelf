@@ -5,7 +5,8 @@ import { useNavigate } from "react-router";
 
 const AllBooks = () => {
   const [books, setBooks] = useState([]);
-  const [search, setSearch] = useState("");
+  const [searchText, setSearchText] = useState("");
+  const [readingStatus, setReadingStatus] = useState(""); // for dropdown filter
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,10 +16,20 @@ const AllBooks = () => {
       .catch((err) => console.error("Error loading books:", err));
   }, []);
 
-  // Search by reading status
-  const filteredBooks = books.filter((book) =>
-    book.status?.toLowerCase().includes(search.toLowerCase())
-  );
+  // Combined filter: filter by searchText (title or author) AND by readingStatus (if selected)
+  const filteredBooks = books.filter((book) => {
+    // Search by title or author (case-insensitive)
+    const matchesSearch =
+      book.title.toLowerCase().includes(searchText.toLowerCase()) ||
+      book.author.toLowerCase().includes(searchText.toLowerCase());
+
+    // Filter by reading status if a status is selected
+    const matchesStatus = readingStatus
+      ? book.status?.toLowerCase() === readingStatus.toLowerCase()
+      : true; // no filter if readingStatus is empty
+
+    return matchesSearch && matchesStatus;
+  });
 
   return (
     <div className="min-h-screen bg-stone-300 py-10 px-6">
@@ -26,22 +37,29 @@ const AllBooks = () => {
         📚 Explore the Bookshelf
       </h2>
 
-      {/* Search by Reading Status */}
-      <div className="max-w-md mx-auto mb-10 flex gap-2">
-  <select
-    value={search}
-    onChange={(e) => setSearch(e.target.value)}
-    className="w-full text-stone-950 bg-white px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
-  >
-    <option value="">All</option>
-    
-    <option value="Reading">Reading</option>
-    <option value="Want-to-Read">Want-to-Read</option>
-    <option value="Read">Read</option>
-  </select>
+      {/* Filters */}
+      <div className="max-w-xl mx-auto mb-10 flex gap-4">
+        {/* Search bar */}
+        <input
+          type="text"
+          placeholder="Search by title or author..."
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          className="flex-grow px-4 bg-stone-500 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        />
 
-</div>
-
+        {/* Reading status dropdown */}
+        <select
+          value={readingStatus}
+          onChange={(e) => setReadingStatus(e.target.value)}
+          className="w-40 text-stone-950 bg-white px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        >
+          <option value="">All </option>
+          <option value="Reading">Reading</option>
+          <option value="Want-to-Read">Want-to-Read</option>
+          <option value="Read">Read</option>
+        </select>
+      </div>
 
       {/* Books */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -65,7 +83,8 @@ const AllBooks = () => {
               <p className="text-gray-600 text-sm">Author: {book.author}</p>
               <p className="text-gray-600 text-sm">Category: {book.category}</p>
               <p className="text-gray-600 text-sm">
-                Reading Status: <span className="font-medium">{book.status || "N/A"}</span>
+                Reading Status:{" "}
+                <span className="font-medium">{book.status || "N/A"}</span>
               </p>
               <p className="text-gray-600 text-sm">
                 Upvotes: {book.upvoted?.length || 0}
@@ -74,7 +93,7 @@ const AllBooks = () => {
           ))
         ) : (
           <p className="text-center col-span-full text-gray-500">
-            No books found for this reading status.
+            No books found matching your criteria.
           </p>
         )}
       </div>

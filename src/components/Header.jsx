@@ -1,12 +1,13 @@
 import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom"; // FIXED: from "react-router" to "react-router-dom"
+import { Link, useNavigate } from "react-router"; 
 import logo from "../assets/logo.png";
 import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
+import { use } from "react";
 
 const Header = () => {
-  const { user, logOut } = useContext(AuthContext); // FIXED: useContext instead of use()
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // For hamburger menu toggle
+  const { user, logOut } = use(AuthContext); 
+  const [isMenuOpen, setIsMenuOpen] = useState(true); 
   const navigate = useNavigate();
 
   const handleLogOut = () => {
