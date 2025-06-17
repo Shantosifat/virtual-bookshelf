@@ -3,22 +3,22 @@ import { Typewriter } from "react-simple-typewriter";
 
 const slides = [
   {
-    title: "Find the Right Freelancer, Fast!",
-    subtitle: "Post tasks, get bids, and hire with confidence.",
+    title: "Discover Your Next Favorite Book",
+    subtitle: "Explore top categories like Fiction, Fantasy, and more!",
     image:
-      "https://i.postimg.cc/C5sr3qFX/darran-shen-DHp-JPGD7-PQ0-unsplash.jpg",
+      "https://i.postimg.cc/1tcR7Btp/pexels-buro-millennial-636760-1438081.jpg",
   },
   {
-    title: "Get Work Done on Your Terms",
-    subtitle: "Flexible, secure, and reliable freelance services.",
+    title: "Read. Review. Recommend.",
+    subtitle: "Share your thoughts and connect with book lovers.",
     image:
       "https://i.postimg.cc/2SGb186Y/dylan-gillis-Kdeq-A3a-Tn-BY-unsplash.jpg",
   },
   {
-    title: "Join a Growing Community",
-    subtitle: "Thousands of tasks completed every week.",
+    title: "Build Your Virtual Bookshelf",
+    subtitle: "Add, upvote, and manage books that inspire you.",
     image:
-      "https://i.postimg.cc/Y0mkvGWH/redd-francisco-5-U-28ojjgms-unsplash.jpg",
+      "https://i.postimg.cc/3N5pmnqm/Digital-Book-Library-1.jpg",
   },
 ];
 
@@ -47,10 +47,10 @@ const Banner = () => {
       <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20 text-white text-xl md:text-3xl font-semibold bg-black/50 px-4 py-2 rounded-md shadow-lg">
         <Typewriter
           words={[
-            "Hire Smarter, Not Harder.",
-            "Connect with Top Freelancers.",
-            "Build. Collaborate. Succeed.",
-            "Your Task, Your Terms.",
+            "Read Smarter, Not Harder.",
+            "Discover Your Next Favorite Book.",
+            "Add. Review. Connect.",
+            "Your Shelf, Your Story.",
           ]}
           loop={true}
           cursor

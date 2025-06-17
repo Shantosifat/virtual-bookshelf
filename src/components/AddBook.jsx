@@ -16,7 +16,7 @@ const AddBook = () => {
     const newBook = Object.fromEntries(formData.entries());
     console.log(newBook);
 
-    newBook.likedBy = [];
+    newBook.upvoted = [];
 
     // save book data
     axios
@@ -149,16 +149,16 @@ const AddBook = () => {
             </div>
 
             {/* Upvote (read-only) */}
-            <div>
+            {/* <div>
               <label className="block text-gray-600 mb-1">Upvotes</label>
               <input
                 name="upvote"
-                defaultValue="0"
-                readOnly
+
+              
                 className="w-full px-4 py-2 text-black border border-gray-300 rounded-lg "
                 type="number"
               />
-            </div>
+            </div> */}
           </div>
 
           {/* Book Overview */}

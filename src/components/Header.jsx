@@ -50,7 +50,7 @@ const Header = () => {
               </Link>
             </li>
             <li>
-              <Link to="/bookShelf" className="font-semibold">
+              <Link to="/bookShelfs" className="font-semibold">
                 BookShelf
               </Link>
             </li>

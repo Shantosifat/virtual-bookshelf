@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../Provider/AuthProvider";
 import axios from "axios";
-import UpdateBook from "./BookShelfs";
+import UpdateBook from "./BookDetails";
 import { Link, useNavigate } from "react-router";
 
 const BookShelf = ({ book, books, setBooks }) => {
