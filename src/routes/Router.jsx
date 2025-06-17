@@ -12,8 +12,9 @@ import MyBooks from "../components/MyBooks";
 import Profile from "../components/Profile";
 import axios from "axios";
 import BookDetails from "../components/BookDetails";
-import UpdateBook from "../components/UpdateBook";
+import UpdateBook from "../components/BookShelfs";
 import Error from "../components/Error";
+import Bookshelfs from "../components/BookDetails";
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +30,11 @@ export const router = createBrowserRouter([
       {
         path: "bookShelf",
         Component: BookShelf,
+      },
+
+      {
+        path: "bookShelfs",
+        Component: Bookshelfs,
       },
       {
         path: "addBook",

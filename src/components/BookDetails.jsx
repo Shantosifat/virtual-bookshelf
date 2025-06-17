@@ -1,84 +1,37 @@
-import React from "react";
-import { Link, useLoaderData } from "react-router";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { motion } from "framer-motion";
 
-const BookDetails = () => {
-  const { data: book } = useLoaderData();
+const Bookshelfs = () => {
+  const [books, setBooks] = useState([]);
 
-  if (!book)
-    return (
-      <div className="text-center py-10 text-xl">Loading book details...</div>
-    );
-
-  const {
-    title,
-    photo,
-    author,
-    total_page,
-    category,
-    status,
-    overview,
-    likedBy,
-    user,
-  } = book;
+  useEffect(() => {
+    axios.get(`${import.meta.env.VITE_API_URL}/books`)
+      .then(res => setBooks(res.data))
+      .catch(err => console.error("Error loading books:", err));
+  }, []);
 
   return (
-    <div className="max-w-5xl mx-auto  py-6 mt-10 rounded-2xl shadow-md bg-slate-100">
-      <div className="grid md:grid-cols-2 gap-8 items-start">
-        {/* Book Cover */}
-        <div className="flex justify-center">
-          <img
-            src={photo}
-            alt={title}
-            className="w-full max-w-sm h-auto object-cover rounded-xl shadow-lg"
-          />
-        </div>
-
-        {/* Book Info */}
-        <div className="flex flex-col space-y-4 text-gray-800">
-          <div>
-            <h2 className="text-3xl font-bold">{title}</h2>
-            <p className="text-sm text-gray-600">
-              by <span className="font-semibold">{author}</span>
-            </p>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-3 text-sm">
-            <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-medium">
-              Category: {category}
-            </span>
-            <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full font-medium">
-              Status: {status}
-            </span>
-            <span className="bg-gray-200 text-gray-800 px-3 py-1 rounded-full font-medium">
-              Pages: {total_page}
-            </span>
-          </div>
-
-          <div>
-            <h3 className="text-lg font-semibold mt-2">Overview</h3>
-            <p className="text-sm text-gray-700 leading-relaxed">{overview}</p>
-          </div>
-
-          <div className="pt-4">
-            <h4 className="text-sm font-semibold text-gray-700">Added by:</h4>
-            <p className="text-sm text-gray-600">
-              {user?.name} ({user?.email})
-            </p>
-          </div>
-          <div className="pt-4 border-t border-gray-300">
-            <h4 className="text-sm font-semibold text-gray-700">
-              Likes: {likedBy.length}
-            </h4>
-          </div>
-          <Link to="/">
-            <button className="btn btn-active w-sm ml-7 mt-20">
-              Back To Previous Page
-            </button>
-          </Link>
-        </div>
+    <div className="min-h-screen bg-slate-50 py-10 px-6">
+      <h2 className="text-4xl font-bold text-center mb-10 text-indigo-800">📚 Explore the Bookshelf</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {books.map(book => (
+          <motion.div
+            key={book._id}
+            className="bg-white rounded-xl shadow-md p-5"
+            whileHover={{ scale: 1.03 }}
+            transition={{ duration: 0.3 }}
+          >
+            <img src={book.photo} alt={book.title} className="w-full h-60 object-cover rounded-md mb-4" />
+            <h3 className="text-xl font-bold text-indigo-700 mb-1">{book.title}</h3>
+            <p className="text-gray-600 text-sm">Author: {book.author}</p>
+            <p className="text-gray-600 text-sm">Category: {book.category}</p>
+            <p className="text-gray-600 text-sm">Upvotes: {book.upvote || 0}</p>
+          </motion.div>
+        ))}
       </div>
     </div>
   );
 };
 
-export default BookDetails;
+export default Bookshelfs;
