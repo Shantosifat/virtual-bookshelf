@@ -10,11 +10,6 @@ const Login = () => {
   const { logIn, googleSignIn } = use(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
-  //  const [showPassword, setShowPassword] = useState(false);
-
-  
-   
-
 
   // login
   const handleSignIn = (e) => {
@@ -48,7 +43,7 @@ const Login = () => {
         navigate(`${location.state ? location.state : "/"}`);
       })
       .catch((error) => {
-        console.log(error);
+        alert(error);
       });
   };
 
@@ -61,7 +56,7 @@ const Login = () => {
         navigate(`${location.state ? location.state : "/"}`);
       })
       .catch((error) => {
-        console.log(error);
+        alert(error);
       });
   };
   return (

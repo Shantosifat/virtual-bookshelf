@@ -49,12 +49,12 @@ const Signup = () => {
             console.log(" profile updated");
           })
           .catch((error) => {
-            console.log("updated failed", error);
+            alert("updated failed", error);
           });
         navigate("/");
       })
       .catch((error) => {
-        console.log(error);
+        alert(error);
       });
   };
 
@@ -67,7 +67,7 @@ const Signup = () => {
         navigate("/");
       })
       .catch((error) => {
-        console.log(error);
+        alert(error);
       });
   };
   return (

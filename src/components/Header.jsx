@@ -1,13 +1,12 @@
 import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router"; 
+import { Link, useNavigate } from "react-router-dom"; // fixed router
 import logo from "../assets/logo.png";
 import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
-import { use } from "react";
 
 const Header = () => {
-  const { user, logOut } = use(AuthContext); 
-  const [isMenuOpen, setIsMenuOpen] = useState(true); 
+  const { user, logOut } = useContext(AuthContext);
+  const [isMenuOpen, setIsMenuOpen] = useState(true);
   const navigate = useNavigate();
 
   const handleLogOut = () => {
@@ -21,7 +20,6 @@ const Header = () => {
       });
   };
 
-  // links
   const navLinks = (
     <>
       <li><Link to="/">Home</Link></li>
@@ -38,10 +36,9 @@ const Header = () => {
 
   return (
     <div className="bg-base-100 shadow-sm px-20 py-5 fixed top-0 left-0 w-full z-50">
-
       {/* Header Container */}
       <div className="flex justify-between items-center">
-        {/* Left - Logo */}
+        {/* Logo */}
         <div className="flex items-center gap-2">
           <img src={logo} className="w-10" alt="logo" />
           <Link to="/" className="text-xl font-bold">Libree</Link>
@@ -53,9 +50,21 @@ const Header = () => {
             {navLinks}
           </ul>
           {user ? (
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 relative group">
+              {/* Profile Photo */}
               {user.photoURL && (
-                <img src={user.photoURL} alt="user" className="w-8 h-8 rounded-full" />
+                <div className="relative group">
+                  <img
+                    src={user.photoURL}
+                    alt="user"
+                    className="w-8 h-8 rounded-full cursor-pointer"
+                  />
+                  {/* Hover Tooltip */}
+                  <div className="absolute top-10 left-0 bg-white shadow-md border rounded-md px-3 py-2 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-50 w-56">
+                    <p className="font-semibold text-gray-800">{user.displayName}</p>
+                    <p className="text-gray-600 text-xs">{user.email}</p>
+                  </div>
+                </div>
               )}
               <button className="btn btn-warning" onClick={handleLogOut}>
                 Log Out
@@ -69,22 +78,13 @@ const Header = () => {
           )}
         </div>
 
-        {/* Hamburger for Mobile */}
+        {/* Mobile Menu Toggle */}
         <div className="lg:hidden">
           <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="btn btn-ghost">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
-              />
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6"
+              fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
             </svg>
           </button>
         </div>

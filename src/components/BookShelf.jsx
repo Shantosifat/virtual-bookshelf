@@ -56,42 +56,6 @@ const BookShelf = ({ book, books, setBooks }) => {
     });
   };
 
-  //     const { name, value } = e.target;
-  //     setFormData(prev => ({ ...prev, [name]: value }));
-  //   };
-
-  //   const handleUpdate = (e) => {
-  //     e.preventDefault();
-  //     console.log("object");
-  //     const form = e.target;
-  //     const formData = new FormData(form);
-  //     const updatedData = Object.fromEntries(formData.entries());
-  //     console.log(updatedData);
-
-  //     // send updated data to the db
-  //     fetch(`${import.meta.env.VITE_API_URL}/update/${_id}`, {
-  //       method: "PUT",
-  //       headers: {
-  //         "content-type": "application/json",
-  //       },
-  //       body: JSON.stringify(updatedData),
-  //     })  .then((res) => res.json())
-  //       .then((data) => {
-  //         console.log("after update", data);
-  //         if (data.modifiedCount) {
-  //           Swal.fire({
-  //             position: "middle",
-  //             icon: "success",
-  //             title: "Updated Successfully",
-  //             showConfirmButton: false,
-  //             timer: 1000,
-  //           });
-  //           setIsModalOpen(false);
-  //         }
-  //         navigate('/')
-  //       });
-
-  //   };
 
   const handleUpdate = (e) => {
     e.preventDefault();
