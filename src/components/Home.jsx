@@ -10,6 +10,8 @@ import HowItWorks from "./HowItWorks";
 import { motion } from "framer-motion";
 import About from "./About";
 import Contact from "./Contact";
+import SalesPromotion from "./SalesPromotion";
+import Newsletter from "./Newsletter";
 
 const Home = () => {
   const data = useLoaderData();
@@ -61,11 +63,7 @@ const Home = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.1 }}
               >
-                <BookShelf
-                  book={book}
-                  books={books}
-                  setBooks={setBooks}
-                />
+                <BookShelf book={book} books={books} setBooks={setBooks} />
               </motion.div>
             ))}
         </motion.div>
@@ -79,8 +77,10 @@ const Home = () => {
         viewport={{ once: true }}
       >
         <Featured />
+        <SalesPromotion></SalesPromotion>
         <WhyChooseUs />
         <HowItWorks />
+        <Newsletter></Newsletter>
       </motion.div>
     </div>
   );

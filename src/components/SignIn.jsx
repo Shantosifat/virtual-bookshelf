@@ -5,6 +5,7 @@ import { use } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import { FaGoogle } from "react-icons/fa";
 import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 const Login = () => {
   const { logIn, googleSignIn } = use(AuthContext);
@@ -24,15 +25,15 @@ const Login = () => {
     const isLongEnough = password.length >= 6;
 
     if (!hasUppercase) {
-      alert("Password must contain at least one uppercase letter.");
+      toast.error("Password must contain at least one uppercase letter.");
       return;
     }
     if (!hasLowercase) {
-      alert("Password must contain at least one lowercase letter.");
+      toast.error("Password must contain at least one lowercase letter.");
       return;
     }
     if (!isLongEnough) {
-      alert("Password must be at least 6 characters long.");
+      toast.error("Password must be at least 6 characters long.");
       return;
     }
 
@@ -43,7 +44,7 @@ const Login = () => {
         navigate(`${location.state ? location.state : "/"}`);
       })
       .catch((error) => {
-        alert(error);
+        toast.error(error);
       });
   };
 
@@ -141,6 +142,7 @@ const Login = () => {
           </p>
         </div>
       </div>
+      <Toaster position="top-right" reverseOrder={false} />
     </div>
   );
 };

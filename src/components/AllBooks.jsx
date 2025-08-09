@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
+import { AuthContext } from "../Provider/AuthProvider";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router";
 
 const AllBooks = () => {
   const [books, setBooks] = useState([]);
+  const { user } = useContext(AuthContext);
   const [searchText, setSearchText] = useState("");
   const [readingStatus, setReadingStatus] = useState("");
   const navigate = useNavigate();
+  
 
   useEffect(() => {
     axios
@@ -30,6 +33,13 @@ const AllBooks = () => {
 
     return matchesSearch && matchesStatus;
   });
+  const handleView = (_id) => {
+    if (!user) {
+      navigate("/auth/signIn");
+    } else {
+      navigate(`/book/${_id}`);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-stone-300 py-10 px-6">
@@ -39,28 +49,27 @@ const AllBooks = () => {
 
       {/* Filters */}
       <div className="max-w-xl mx-auto mb-10 flex flex-col sm:flex-row gap-4">
-  {/* Search bar */}
-  <input
-    type="text"
-    placeholder="Search by title or author..."
-    value={searchText}
-    onChange={(e) => setSearchText(e.target.value)}
-    className="flex-grow px-4 bg-stone-500 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
-  />
+        {/* Search bar */}
+        <input
+          type="text"
+          placeholder="Search by title or author..."
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          className="flex-grow px-4 bg-stone-500 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        />
 
-  {/* Reading status dropdown */}
-  <select
-    value={readingStatus}
-    onChange={(e) => setReadingStatus(e.target.value)}
-    className="w-full sm:w-40 text-stone-950 bg-white px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
-  >
-    <option value="">All </option>
-    <option value="Reading">Reading</option>
-    <option value="Want-to-Read">Want-to-Read</option>
-    <option value="Read">Read</option>
-  </select>
-</div>
-
+        {/* Reading status dropdown */}
+        <select
+          value={readingStatus}
+          onChange={(e) => setReadingStatus(e.target.value)}
+          className="w-full sm:w-40 text-stone-950 bg-white px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        >
+          <option value="">All </option>
+          <option value="Reading">Reading</option>
+          <option value="Want-to-Read">Want-to-Read</option>
+          <option value="Read">Read</option>
+        </select>
+      </div>
 
       {/* Books */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -87,9 +96,15 @@ const AllBooks = () => {
                 Reading Status:{" "}
                 <span className="font-medium">{book.status || "N/A"}</span>
               </p>
-              <p className="text-gray-600 text-sm">
+              <p className="text-gray-600 text-sm mb-3">
                 Upvotes: {book.upvoted?.length || 0}
               </p>
+              <button
+               onClick={() => handleView(book._id)}
+                className="btn btn-outline btn-primary"
+              >
+                See More
+              </button>
             </motion.div>
           ))
         ) : (

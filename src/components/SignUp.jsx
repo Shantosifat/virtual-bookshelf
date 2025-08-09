@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router";
 import Lottie from "lottie-react";
 import { AuthContext } from "../Provider/AuthProvider";
 import { FaGoogle } from "react-icons/fa";
+import toast, { Toaster } from "react-hot-toast";
 
 const Signup = () => {
   const { createUser, googleSignIn, updateUserProfile } = use(AuthContext);
@@ -24,15 +25,15 @@ const Signup = () => {
     const isLongEnough = password.length >= 6;
 
     if (!hasUppercase) {
-      alert("Password must contain at least one uppercase letter.");
+      toast.error("Password must contain at least one uppercase letter.");
       return;
     }
     if (!hasLowercase) {
-      alert("Password must contain at least one lowercase letter.");
+      toast.error("Password must contain at least one lowercase letter.");
       return;
     }
     if (!isLongEnough) {
-      alert("Password must be at least 6 characters long.");
+      toast.error("Password must be at least 6 characters long.");
       return;
     }
 
@@ -46,15 +47,15 @@ const Signup = () => {
           photoURL: photo || [],
         })
           .then(() => {
-            console.log(" profile updated");
+            toast.success(" profile updated");
           })
           .catch((error) => {
-            alert("updated failed", error);
+            toast.error("updated failed", error);
           });
         navigate("/");
       })
       .catch((error) => {
-        alert(error);
+        toast.error(error);
       });
   };
 
@@ -166,6 +167,7 @@ const Signup = () => {
           </p>
         </div>
       </div>
+      <Toaster position="top-right" reverseOrder={false} />
     </div>
   );
 };
