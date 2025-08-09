@@ -38,28 +38,29 @@ const AllBooks = () => {
       </h2>
 
       {/* Filters */}
-      <div className="max-w-xl mx-auto mb-10 flex gap-4">
-        {/* Search bar */}
-        <input
-          type="text"
-          placeholder="Search by title or author..."
-          value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
-          className="flex-grow px-4 bg-stone-500 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
-        />
+      <div className="max-w-xl mx-auto mb-10 flex flex-col sm:flex-row gap-4">
+  {/* Search bar */}
+  <input
+    type="text"
+    placeholder="Search by title or author..."
+    value={searchText}
+    onChange={(e) => setSearchText(e.target.value)}
+    className="flex-grow px-4 bg-stone-500 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+  />
 
-        {/* Reading status dropdown */}
-        <select
-          value={readingStatus}
-          onChange={(e) => setReadingStatus(e.target.value)}
-          className="w-40 text-stone-950 bg-white px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
-        >
-          <option value="">All </option>
-          <option value="Reading">Reading</option>
-          <option value="Want-to-Read">Want-to-Read</option>
-          <option value="Read">Read</option>
-        </select>
-      </div>
+  {/* Reading status dropdown */}
+  <select
+    value={readingStatus}
+    onChange={(e) => setReadingStatus(e.target.value)}
+    className="w-full sm:w-40 text-stone-950 bg-white px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+  >
+    <option value="">All </option>
+    <option value="Reading">Reading</option>
+    <option value="Want-to-Read">Want-to-Read</option>
+    <option value="Read">Read</option>
+  </select>
+</div>
+
 
       {/* Books */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
