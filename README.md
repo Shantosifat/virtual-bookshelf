@@ -9,7 +9,7 @@ Libree is a modern and interactive online bookshelf platform built with React. U
 ## 🔗 Live URL
 
 👉 [Visit Libree Live](https://virtual-bookshelf-87634.web.app/)  
-*(Replace with your actual deployed link)*
+
 
 ---
 
@@ -48,16 +48,76 @@ The goal of **Libree** is to provide an organized and dynamic platform for reade
 ---
 
 
-# React + Vite
+🛠 Technologies Used
+**Frontend**
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+⚛️ React.js
 
-Currently, two official plugins are available:
+🎨 Tailwind CSS + DaisyUI
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🎭 Framer Motion
 
-## Expanding the ESLint configuration
+🔄 React Query
+
+🔐 Firebase Auth
+
+**Backend**
+
+🟢 Node.js + Express.js
+
+🍃 MongoDB
+
+🔐 JWT Authentication
+
+🔑 Firebase Admin SDK
+
+## ✨ Core Features
+
+🔐 Authentication & Authorization with Firebase & JWT
+
+📚 Book Management (Add, update, delete, search, filter)
+
+📖 Borrow & Return System
+
+📊 Borrow History Tracking
+
+🗂 Admin Dashboard for user & catalog management
+
+📱 Fully Responsive Design
+
+## 📦 Dependencies
+### Frontend
+
+json
+Copy
+Edit
+"axios", "react", "react-dom", "react-router-dom", "react-query",
+"tailwindcss", "daisyui", "framer-motion", "firebase"
+### Backend
+
+json
+Copy
+Edit
+"express", "cors", "dotenv", "jsonwebtoken", "mongodb", "cookie-parser", "firebase-admin"
+
+## ⚙️ Steps to Run Locally
+1.Clone the repository – git clone https://github.com/yourusername/libree.git
+
+2.Install frontend dependencies – cd client && npm install
+
+3.Install backend dependencies – cd ../server && npm install
+
+4.Create .env file for client – Add VITE_apiUrl and Firebase keys
+
+5.Create .env file for server – Add PORT, MONGO_URI, JWT_SECRET
+
+6.Run backend – cd server && npm run dev
+
+7.Run frontend – cd ../client && npm run dev
+
+/.Open in browser – http://localhost:5173
+
+
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project....
 
