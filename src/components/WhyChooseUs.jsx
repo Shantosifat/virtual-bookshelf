@@ -21,7 +21,7 @@ const cards = [
 
 const WhyChooseUs = () => {
   return (
-    <div className="py-16 px-6 bg-white">
+    <div className="py-16 rounded-xl px-6 bg-white">
       <h2 className="text-3xl font-bold text-center text-indigo-700 mb-10">
         💡 Why Choose Us?
       </h2>

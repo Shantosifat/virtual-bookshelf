@@ -28,7 +28,7 @@ const categories = [
 
 const Featured = () => {
   return (
-    <div className="py-16 px-6 bg-gradient-to-r from-indigo-50 to-purple-100">
+    <div className="py-16 rounded-xl px-6 bg-gradient-to-r from-indigo-50 to-purple-100">
       <h2 className="text-3xl md:text-4xl font-bold text-center text-indigo-700 mb-12">
         📚 Featured Categories
       </h2>

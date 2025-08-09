@@ -22,7 +22,7 @@ const HowItWorks = () => {
   ];
 
   return (
-    <div className="bg-white py-12 px-6 lg:px-20">
+    <div className="bg-white rounded-xl py-12 px-6 lg:px-20">
       <h2 className="text-4xl font-bold text-center text-indigo-800 mb-10">
         📘 How It Works
       </h2>

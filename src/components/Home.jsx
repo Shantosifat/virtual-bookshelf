@@ -16,7 +16,7 @@ const Home = () => {
   const [books, setBooks] = useState(data.data || []);
 
   return (
-    <div>
+    <div className="lg:px-20">
       {/* Banner */}
       <motion.div
         initial={{ opacity: 0, y: -50 }}
