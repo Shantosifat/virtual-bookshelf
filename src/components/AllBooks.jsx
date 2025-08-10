@@ -9,6 +9,7 @@ const AllBooks = () => {
   const { user } = useContext(AuthContext);
   const [searchText, setSearchText] = useState("");
   const [readingStatus, setReadingStatus] = useState("");
+  const [sortOption, setSortOption] = useState("");
   const navigate = useNavigate();
   
 
@@ -64,7 +65,7 @@ const AllBooks = () => {
           onChange={(e) => setReadingStatus(e.target.value)}
           className="w-full sm:w-40 text-stone-950 bg-white px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
         >
-          <option value="">All </option>
+          <option value="">Sort By Reading Status </option>
           <option value="Reading">Reading</option>
           <option value="Want-to-Read">Want-to-Read</option>
           <option value="Read">Read</option>
@@ -103,7 +104,7 @@ const AllBooks = () => {
                onClick={() => handleView(book._id)}
                 className="btn btn-outline btn-primary"
               >
-                See More
+                View Details
               </button>
             </motion.div>
           ))

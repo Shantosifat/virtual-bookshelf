@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 
 const SalesPromotion = () => {
   return (
@@ -12,9 +13,9 @@ const SalesPromotion = () => {
         Don’t miss out on exclusive deals on bestsellers and new arrivals.
       </p>
       <div className="text-center">
-        <button className="bg-white text-indigo-600 font-semibold px-6 py-3 rounded-lg shadow hover:bg-indigo-50 transition">
+        <Link to='/bookShelfs' className="bg-white text-indigo-600 font-semibold px-6 py-3 rounded-lg shadow hover:bg-indigo-50 transition">
           Shop Now
-        </button>
+        </Link>
       </div>
     </section>
   );
