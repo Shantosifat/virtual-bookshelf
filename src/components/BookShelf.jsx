@@ -125,7 +125,7 @@ const BookShelf = ({ book, books, setBooks }) => {
 
           <div className="mt-6 flex gap-3 flex-wrap">
             <button onClick={handleView} className="btn btn-outline btn-primary">
-              See More
+               View Details
             </button>
 
             {user?.email === email && (

@@ -34,6 +34,10 @@ const AllBooks = () => {
 
     return matchesSearch && matchesStatus;
   });
+  // *** NEW: Sort filtered books by upvotes descending ***
+  const sortedBooks = [...filteredBooks].sort(
+    (a, b) => (b.upvoted?.length || 0) - (a.upvoted?.length || 0)
+  );
   const handleView = (_id) => {
     if (!user) {
       navigate("/auth/signIn");
@@ -74,8 +78,8 @@ const AllBooks = () => {
 
       {/* Books */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredBooks.length > 0 ? (
-          filteredBooks.map((book) => (
+        {sortedBooks.length > 0 ? (
+          sortedBooks.map((book) => (
             <motion.div
               key={book._id}
               className="bg-white rounded-xl shadow-md p-5 cursor-pointer hover:shadow-lg"
