@@ -65,10 +65,11 @@ const Header = () => {
           {user ? (
             <div className="flex items-center gap-3 relative group">
               {/* Profile Photo */}
-              {user.photoURL && (
+              {user?.photoURL && (
                 <div className="relative group">
+                  
                   <img
-                    src={user.photoURL}
+                    src={user?.photoURL}
                     alt="user"
                     className="w-8 h-8 rounded-full cursor-pointer"
                   />
@@ -90,7 +91,7 @@ const Header = () => {
               <Link to="/auth/signIn" className="btn btn-primary">
                 Log In
               </Link>
-              <Link to="/auth/signUp" className="btn btn-secondary">
+              <Link to="/auth/signUp" className="btn btn-outline">
                 Sign Up
               </Link>
             </div>

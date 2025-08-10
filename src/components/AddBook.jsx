@@ -28,7 +28,7 @@ const AddBook = () => {
           icon: "success",
           draggable: true,
         });
-        navigate("/bookshelfs");
+        // navigate("/bookshelfs");
       })
       .catch((error) => {
         console.log(error);
@@ -111,7 +111,7 @@ const AddBook = () => {
               <label className="block text-gray-600 mb-1">Your Name</label>
               <input
                 name="name"
-                // value={user.name}
+                value={user.displayName}
 
                 className="w-full px-4 py-2 text-black border border-gray-300 rounded-lg "
                 type="text"

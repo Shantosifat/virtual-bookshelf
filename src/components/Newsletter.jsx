@@ -1,29 +1,34 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, use } from "react";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const Newsletter = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const {user}= use(AuthContext)
 
   useEffect(() => {
-    // Check if already subscribed
-    const subscribedEmail = localStorage.getItem("subscribedEmail");
-    if (subscribedEmail) {
-      setMessage("You are already subscribed.");
-    }
+    // no need to show message on load anymore
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const subscribedEmail = localStorage.getItem("subscribedEmail");
+    // get the subscribed emails array from localStorage (or empty array)
+    const subscribedEmails = JSON.parse(localStorage.getItem("subscribedEmails") || "[]");
 
-    if (subscribedEmail) {
+    if (subscribedEmails.includes(email)) {
       setMessage("You have already subscribed with this email.");
       return;
     }
 
-    localStorage.setItem("subscribedEmail", email);
+    // add new email to array
+    subscribedEmails.push(email);
+
+    // save back to localStorage
+    localStorage.setItem("subscribedEmails", JSON.stringify(subscribedEmails));
+
     setMessage("Thank you for subscribing!");
+    setEmail(""); // clear input
   };
 
   return (
@@ -39,7 +44,7 @@ const Newsletter = () => {
         <input
           type="email"
           placeholder="Enter your email"
-          value={email}
+          defaultValue={user?.email}
           onChange={(e) => setEmail(e.target.value)}
           required
           className="flex-grow px-4 py-2 text-black rounded-l-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400"

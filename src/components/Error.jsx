@@ -1,51 +1,106 @@
 import React from "react";
-import { Link } from "react-router";
-import { motion } from "framer-motion";
 
-const ErrorPage = () => {
+const Error = () => {
   return (
-    <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center justify-center px-4">
-      <motion.h1
-        className="text-8xl font-extrabold text-indigo-500 mb-4"
-        initial={{ scale: 0.8, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.6 }}
+    <div style={styles.container}>
+      <svg
+        style={styles.eye}
+        viewBox="0 0 64 64"
+        width="150"
+        height="150"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        404
-      </motion.h1>
+        {/* Eye outline */}
+        <ellipse
+          cx="32"
+          cy="32"
+          rx="30"
+          ry="18"
+          fill="none"
+          stroke="#333"
+          strokeWidth="4"
+        />
+        {/* Iris */}
+        <circle
+          cx="32"
+          cy="32"
+          r="10"
+          fill="#6ab7ff"
+          style={{ animation: "irisPulse 3s ease-in-out infinite" }}
+        />
+        {/* Pupil */}
+        <circle
+          cx="32"
+          cy="32"
+          r="5"
+          fill="#003366"
+          style={{ animation: "pupilMove 6s ease-in-out infinite" }}
+        />
+        {/* Highlight */}
+        <circle cx="38" cy="26" r="3" fill="#aaddff" opacity="0.7" />
+      </svg>
 
-      <motion.h2
-        className="text-2xl md:text-3xl font-semibold text-center mb-6"
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.5 }}
-      >
-        Oops! Page not found.
-      </motion.h2>
+      <h1 style={styles.title}>404 - Page Not Found</h1>
+      <p style={styles.text}>
+        Oops! The page you are looking for doesn’t exist or has been moved.
+      </p>
+      <a href="/" style={styles.link}>
+        Go back home
+      </a>
 
-      <motion.p
-        className="text-gray-300 text-center max-w-md mb-8"
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.5 }}
-      >
-        The page you are looking for doesn’t exist or has been moved. Let’s get you back to a safe place.
-      </motion.p>
+      <style>
+        {`
+          @keyframes irisPulse {
+            0%, 100% { r: 10; fill: #6ab7ff; }
+            50% { r: 12; fill: #4a90e2; }
+          }
 
-      <motion.div
-        initial={{ y: 10, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay:0.5  }}
-      >
-        <Link
-          to="/"
-          className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-lg transition duration-300"
-        >
-          Go to Homepage
-        </Link>
-      </motion.div>
+          @keyframes pupilMove {
+            0%, 100% { cx: 32; cy: 32; }
+            25% { cx: 34; cy: 30; }
+            50% { cx: 30; cy: 34; }
+            75% { cx: 32; cy: 32; }
+          }
+        `}
+      </style>
     </div>
   );
 };
 
-export default ErrorPage;
+const styles = {
+  container: {
+    height: "100vh",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    background: "#f0f4f8",
+    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+    color: "#333",
+    textAlign: "center",
+    padding: "0 20px",
+  },
+  eye: {
+    marginBottom: "20px",
+  },
+  title: {
+    fontSize: "3rem",
+    marginBottom: "10px",
+  },
+  text: {
+    fontSize: "1.25rem",
+    marginBottom: "30px",
+    maxWidth: "400px",
+  },
+  link: {
+    fontSize: "1.1rem",
+    color: "#4a90e2",
+    textDecoration: "none",
+    border: "2px solid #4a90e2",
+    padding: "10px 20px",
+    borderRadius: "30px",
+    transition: "all 0.3s ease",
+  },
+};
+
+export default Error;
